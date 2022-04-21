@@ -45,7 +45,64 @@ Create a folder and npm init -y ; npm install express , script  [package.json]
         res.send(user)
     })
 
+# display user using react 
 
+    //client site 
+    import React, { useEffect, useState } from 'react';
+    import './App.css'
+
+    const App = () => {
+    const [users, setUsers] = useState([])
+    useEffect(() => {
+    fetch('http://localhost:5000/users')
+      .then(res => res.json())
+      .then(data => setUsers(data))
+    }, [])
+
+    const handleAddUser = e => {
+    e.preventDefault()
+    const name = e.target.name.value
+    const email = e.target.email.value
+    const user = { name, email }
+    console.log(user);
+
+    //post data
+    fetch('http://localhost:5000/user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
+    })
+      .then(res => res.json())
+      .then(data => {
+        const newUser = [...users, data]
+        setUsers(newUser)
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+
+
+    }
+
+    return (
+            <div className='App'>
+            <h2>Module 64 practice {users.length}</h2>
+            <form onSubmit={handleAddUser}>
+                <input type="text" name="name" id=" " placeholder='Name' required />
+                <input type="text" name="email" id=" " placeholder='Email' required />
+                <input type="submit" value="addUser" />
+            </form>
+            {
+                users.map(user => <p>Id: {user.id} Name : {user.name} Email : {user.email}</p>)
+            }
+            </div>
+        );
+    };
+
+    export default App;
     
 
 
