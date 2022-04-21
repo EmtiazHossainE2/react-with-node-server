@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors')
 const app = express()
 app.use(cors())
+app.use(express.json())
 const port = process.env.PORT || 5000
 
 app.get('/', (req, res) => {
@@ -28,6 +29,15 @@ app.get('/user/:id', (req, res) => {
     res.send(user)
 })
 
+
+//post 
+app.post('/user', (req, res) => {
+    console.log('request', req.body);
+    const user = req.body
+    user.id = users.length + 1
+    users.push(user)
+    res.send(user)
+})
 
 
 app.listen(port, () => {
