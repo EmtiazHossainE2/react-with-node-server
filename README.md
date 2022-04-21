@@ -1,11 +1,12 @@
 # React-with-node-server 
 
 
- * folder banay npm init -y ; npm install express , script e [package.json] 
+# folder banay npm init -y ; npm install express , script e [package.json] 
+
     "start" : "node index.js",
     "start-dev" : "nodemon index.js",
 
- * index.js => 
+# index.js => 
 
     const express = require('express');
     const app = express()
@@ -18,7 +19,7 @@
     app.listen(port, () => {
         console.log(`listening on port `, port)
     })
- * 
- * 
- * 
-*/
+
+    
+
+
